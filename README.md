@@ -26,8 +26,21 @@ python --version
 You can also try running it on Heroku by following the steps laid out here after downloading the project folder:
 https://devcenter.heroku.com/articles/getting-started-with-python. Instead of the sample app, just use the 
 project folder. The files needed are already in the project file, so you shouldn't have to worry about the 
-procfile part or anything after the deploy the app tab. In addition, all of the required libraries are in the 
-requirements.txt, so you don't need to worry about downloading those to Heroku.
+procfile part or anything after the deploy the app tab. Also, after creating the app, you should make a git 
+repository and add and commit the project folder to it. Then use this git command to connect the heroku git and 
+the git that you just created. 
+
+heroku git:remote -a {your-project-name}
+
+Now you're ready to use: 
+
+git push heroku master
+
+Then all you have to do is type:
+
+heroku open 
+
+And it will take you to the website!
 
 # Running it locally or on CS50 IDE
 
