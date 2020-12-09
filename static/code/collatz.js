@@ -4,6 +4,7 @@ let loops;
 let looping = true;
 let gaussian = .01;
 
+// Setup function
 function setup() {
   var canvas = createCanvas(500, 500);
   canvas.parent("sketch-holder");
@@ -13,10 +14,12 @@ function setup() {
   frameRate(10);
 }
 
+// Makes it more random when mouse is pressed
 function mousePressed() {
   gaussian += 5;
 }
 
+// Draws the reversed sequences from the Collatz Conjecture
 function draw() {
   let sequence = [];
   let n = i;
@@ -57,6 +60,7 @@ function draw() {
   }
 }
 
+// Collatz Conjecture
 function collatz(n) {
   if (n % 2 == 0) {
     return n / 2;

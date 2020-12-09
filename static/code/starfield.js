@@ -3,6 +3,7 @@ let speed;
 
 let looping = true;
 
+// Setup function 
 function setup() {
   var canvas = createCanvas(500,500);
   canvas.parent("sketch-holder");
@@ -11,6 +12,7 @@ function setup() {
   }
 }
 
+// Draws the stars from the stars array
 function draw() {
   speed = map(mouseX, -width*1.5, width, 0, 15);
   background(0);
@@ -21,6 +23,7 @@ function draw() {
   }
 }
 
+// Class star that has update and show functions
 class Star {
   constructor() {
     this.x = random(-width, width);
@@ -30,6 +33,7 @@ class Star {
     this.pz = this.z;
   }
 
+  // Updates position by changing z value
   update() {
     this.z = this.z - speed;
     if (this.z < 1) {
@@ -40,6 +44,7 @@ class Star {
     }
   }
 
+  // Draws the star with a line to its previous position
   show() {
     fill(255);
     noStroke();

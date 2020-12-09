@@ -3,6 +3,7 @@ let d = 71; //71
 
 let looping = true;
 
+// Setup function
 function setup() {
   var canvas = createCanvas(500, 500);
   canvas.parent('sketch-holder');
@@ -17,6 +18,7 @@ function setup() {
   //console.log(n);
 }
 
+// Drawing using Maurer Rose equations
 function draw() {
   background(255);
   translate(width/2, height/2);

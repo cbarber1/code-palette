@@ -8,6 +8,7 @@ var flying = 0;
 var terrain = [];
 let looping = true;
 
+// Setup function
 function setup() {
   var c = createCanvas(500, 500, WEBGL);
   c.parent('sketch-holder');
@@ -23,10 +24,12 @@ function setup() {
   frameRate(10);
 }
 
-
+// Draws the terrain
 function draw() {
   flying -= 0.18;
   var yoff = flying;
+
+  // Maps each vertex in the terrain to a z value from Perlin noise and adds it to the 2d array
   for (var y = 0; y < rows; y++) {
     var xoff = 0;
     for (var x = 0; x < cols; x++) {
@@ -36,6 +39,7 @@ function draw() {
     yoff += 0.2;
   }
 
+  // Draws each vertex in 3d space
   clear();
   translate(0, 50);
   rotateX(PI / 3);

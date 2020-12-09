@@ -17,10 +17,12 @@ let gifLength = 210;
 let paintCount = 0;
 var canvas;
 
+// Preloads image 
 function preload() {
   imgs[0] = loadImage("/static/art/code_palette.png");
 }
 
+// Setup function 
 function setup() {
 	if (windowWidth < 500) {
   	var c = createCanvas(windowWidth, windowWidth);
@@ -39,6 +41,7 @@ function setup() {
   frameRate(10);
 }
 
+// Drawing the paint class
 function draw() {
   //console.log(frameRate());
   if (!isStop) {
