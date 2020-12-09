@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Code Palette
+{% endblock %}
+{% block script %}
+    <script src="../static/code/messy_curve.js"></script>
+      <script src="../static/code/paint.js"></script>
+{% endblock %}
+{% block main %}
+        <div id="sketch-holder">
+            <div id="p5_loading" class="jumbotron" style="background: white; height: 175px;"></div>
+        </div>
+        <div class = "fonts">
+            <h3>Thank you for visiting</h3>
+            <div style="padding-top: 2%;">
+            <a class="btn border" href="/">Go Back to Home</a>
+            </div>
+        </div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Code Palette
+{% endblock %}
+{% block script %}
+    <script src="../static/code/messy_curve.js"></script>
+      <script src="../static/code/paint.js"></script>
+{% endblock %}
+{% block main %}
+        <div id="sketch-holder">
+            <div id="p5_loading" class="jumbotron" style="background: white; height: 175px;"></div>
+        </div>
+        <div class = "fonts">
+            <h3>An interactive and dynamic generative art gallery that merges technology, math, and art together.</h3>
+            <div class="container sketchy">
+                <!-- MAKE the border like a cool generative art pattern to separate it from the rest -->
+            <h4>What is generative art?</h4>
+            <p>Generative art refers to art that in whole or in part has been created with the use of an autonomous system.
+            All of the pieces on this website were created using a programming langauge called p5.js, and run in realtime on the browser.
+            This means that many of the pieces are interactive, and almost all of them are animated in some way using code.</p>
+            </div>
+            <div style="padding-top: 2%;">
+            <a class="btn border" href="/art1">Explore Now</a>
+            </div>
+        </div>
+{% endblock %}
