@@ -31,20 +31,14 @@ requirements.txt, so you don't need to worry about downloading those to Heroku.
 
 # Running it locally or on CS50 IDE
 
-The only thing you have to do to run it is three commands.
+The only thing you have to do to run it is two commands.
 
-1. cd project
-
-This just enters you into the project folder from the terminal. There are four folders in this folder. Documentation,
-proposal, status, and code-palette. The design.md file and README.md file are in the documentation folder. The only
-other folder you have to worry about is the code-palette folder.
-
-2. cd code-palette
+1. cd code-palette
 
 This command enters you into the actual flask application folder. Now you're ready to actually run the command that
 starts the flask application.
 
-3. flask run
+2. flask run
 
 And there you go! It should start a flask server, and you can then click on the link that comes up in the
 terminal. It should open a new tab in your browser, and you should see the website! You can use the link
