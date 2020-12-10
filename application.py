@@ -131,7 +131,7 @@ def login():
             return render_template("login.html", alert="danger")
 
         # Query database for username
-        rows = db.execute("SELECT * FROM users1 WHERE username = ?", request.form.get("username"))
+        rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
 
         # Ensure username exists and password is correct
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
@@ -174,7 +174,7 @@ def register():
         confirm = request.form.get("confirmation")
 
         # Query database
-        rows = db.execute("SELECT username FROM users1 WHERE username = ?", username)
+        rows = db.execute("SELECT username FROM users WHERE username = ?", username)
 
         # Error checking
         if not username or not password or not confirm:
@@ -189,7 +189,7 @@ def register():
 
         # Add hashed pass to SQL db
         hashed_pass = generate_password_hash(password)
-        db.execute("INSERT INTO users1(username, hash, name) VALUES(?, ?, ?)", username, hashed_pass, name)
+        db.execute("INSERT INTO users(username, hash, name) VALUES(?, ?, ?)", username, hashed_pass, name)
         flash("Successfully registered!")
         return render_template("login.html")
 
