@@ -187,11 +187,9 @@ def register():
             flash("Your passwords were not the same")
             return render_template("register.html", alert="danger")
 
-        id_num = db.execute("SELECT id FROM id_num")
-        db.execute("UPDATE id_num SET id = id + 1")
         # Add hashed pass to SQL db
         hashed_pass = generate_password_hash(password)
-        db.execute("INSERT INTO users(id, username, hash, name) VALUES(?, ?, ?, ?)", id_num, username, hashed_pass, name)
+        db.execute("INSERT INTO users(username, hash, name) VALUES(?, ?, ?)", username, hashed_pass, name)
         flash("Successfully registered!")
         return render_template("login.html")
 
