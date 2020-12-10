@@ -23,22 +23,9 @@ version with the command
 
 python --version
 
-You can also try running it on Heroku by following the steps laid out here after downloading the project folder:
-https://devcenter.heroku.com/articles/getting-started-with-python. Instead of the sample app, just use the 
-project folder. The files needed are already in the project file, so you shouldn't have to worry about the 
-procfile part or anything after the deploy the app tab. Also, after creating the app, you should make a git 
-repository and add and commit the project folder to it. Then use this git command to connect the heroku git and 
-the git that you just created. 
-
-heroku git:remote -a {your-project-name}
-
-Now you're ready to use: 
-
-git push heroku master
-
-Then all you have to do is type:
-
-heroku open 
+You can also try running it on Heroku by following the steps laid out here after downloading the project folder: 
+https://cs50.readthedocs.io/heroku/ Instead of the sample or finance app, just use the project folder. The files needed are already in the project file, so you shouldn't have to worry about the procfile part or requirements. Instead of finance.db,
+there is also a database in the project file called art.db, which you can copy over to postgres. 
 
 And it will take you to the website!
 
