@@ -15,19 +15,14 @@ Make sure that you have downloaded all the libraries necessary, in addition to t
 - Flask-session
 - requests
 
-If you are going to test in the CS50 ide, there is no need to download anything besides the project folder
-because those libraries are already downloaded on the CS50's server. However, if not, you will need those
-libraries downloaded locally on your own computer. If you are running it locally, make sure to also have
-Python 3.7.9 downloaded, though it might work with other versions of Python 3. You can check your python
-version with the command
+If you are going to test in the CS50 ide, there is no need to download anything besides the project folder because those libraries are already downloaded on the CS50's server. However, if not, you will need those libraries downloaded locally on your own computer. If you are running it locally, make sure to also have Python 3.7.9 downloaded, though it might work with other versions of Python 3. You can check your python version with the command
 
 python --version
 
 You can also try running it on Heroku by following the steps laid out here after downloading the project folder: 
-https://cs50.readthedocs.io/heroku/ Instead of the sample or finance app, just use the project folder. The files needed are already in the project file, so you shouldn't have to worry about the procfile part or requirements. Instead of finance.db,
-there is also a database in the project file called art.db, which you can copy over to postgres. 
+https://cs50.readthedocs.io/heroku/ Instead of the finance app, just use the project folder. The files needed are already in the project file, so you shouldn't have to worry about the procfile part or requirements. Instead of finance.db, there is also a database in the project file called art.db, which you can copy over to postgres. 
 
-And it will take you to the website!
+And then you'll be up and running with Heroku!
 
 # Running it locally or on CS50 IDE
 
@@ -40,18 +35,10 @@ starts the flask application.
 
 2. flask run
 
-And there you go! It should start a flask server, and you can then click on the link that comes up in the
-terminal. It should open a new tab in your browser, and you should see the website! You can use the link
-on any device, not only the one where you started the flask server. However, the website and experience is
-designed for the computer, so it won't work well on a phone. The art pieces cannot resize at the moment,
-so they mess up the design on mobile devices, as well as not having input from the keyboard. It might look
-fine on a tablet, but I'm unsure of the functionality of the website because I haven't been able to test that.
+And there you go! It should start a flask server, and you can then click on the link that comes up in the terminal. It should open a new tab in your browser, and you should see the website! You can use the link on any device, not only the one where you started the flask server. However, the website and experience is designed for the computer, so it won't work well on a phone. The art pieces cannot resize at the moment, so they mess up the design on mobile devices, as well as not having input from the keyboard. It might look fine on a tablet, but I'm unsure of the functionality of the website because I haven't been able to test that.
 
 # Using the website
 
-The website itself is pretty self-explanatory. Once you have the flask server running, you'll be able to use
-the website normally, and access the login and register, as well as the gallery and front page. If you register
-and log in, you'll have access to a favorites page that will be empty until you press the Save Image to Favorites
-button on one of the art pages.
+The website itself is pretty self-explanatory. Once you have the flask server running, you'll be able to use the website normally, and access the login and register, as well as the gallery and front page. If you register and log in, you'll have access to a favorites page that will be empty until you press the Save Image to Favorites button on one of the art pages.
 
 # Have fun and I hope you enjoy my project!
