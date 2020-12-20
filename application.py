@@ -1,5 +1,6 @@
 import os
 import datetime
+import random
 
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session, url_for
@@ -52,7 +53,7 @@ def art():
             number = request.values.get("art_piece")
 
             username = db.execute("SELECT username FROM users WHERE id = ?", session["user_id"])
-            filename = "/static/favorites/" + str(random() * 10000) + username + ".png"
+            filename = "/static/favorites/" + str(random.randint(0, 10000) + username + ".png"
 
             with open(filename, "wb") as f:
                 f.write(url)
