@@ -7,6 +7,7 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
+import json, boto3
 
 from helpers import apology, login_required
 
@@ -41,7 +42,6 @@ def index():
     # grab data
     return render_template("index.html")
 
-
 @app.route("/art1", methods=["GET", "POST"])
 def art():
     # grab data
@@ -49,10 +49,21 @@ def art():
         # making sure the URL exists
         if (request.values.get("favorite") != None):
             url = request.values.get("favorite")
+            photo = request.get(url)
             number = request.values.get("art_piece")
 
+            username = db.execute("SELECT username FROM users WHERE id = ?", session["user_id"])
+            filename = "/static/favorites/" + str(random() * 10000) + username + ".png"
+
+            with open(filename, "wb") as f:
+                f.write(photo.content)
+
+            s3 = boto3.client('s3')
+            with open("FILE_NAME", "rb") as file:
+                s3.upload_fileobj(file, "codepalette", filename)
+
             # Not very efficient because I am saving image into SQL, takes a long time to load
-            db.execute("INSERT INTO favorites (user_id, filename) VALUES (?, ?)", session["user_id"], url)
+            db.execute("INSERT INTO favorites (user_id, filename) VALUES (?, ?)", session["user_id"], filename)
 
             flash("Successfully saved into favorites!")
             return redirect("/art1?next=" + str(number))

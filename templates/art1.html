@@ -8,9 +8,10 @@
 
     <script>
       function toData() {
-        var url = canvas.toDataURL('image/jpg', 0.8);
+        var url = canvas.toDataURL('image/png');//, 0.8);
         document.getElementById("fav").value = url;
       }
+
       function keyTyped() {
         if (key === 's' && looping == true) {
           noLoop();
@@ -82,4 +83,3 @@
         </div>
         {% endif %}
 {% endblock %}
-
