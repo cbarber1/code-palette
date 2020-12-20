@@ -49,14 +49,13 @@ def art():
         # making sure the URL exists
         if (request.values.get("favorite") != None):
             url = request.values.get("favorite")
-            photo = request.get(url)
             number = request.values.get("art_piece")
 
             username = db.execute("SELECT username FROM users WHERE id = ?", session["user_id"])
             filename = "/static/favorites/" + str(random() * 10000) + username + ".png"
 
             with open(filename, "wb") as f:
-                f.write(photo.content)
+                f.write(url)
 
             s3 = boto3.client('s3')
             with open("FILE_NAME", "rb") as file:
