@@ -53,6 +53,8 @@ def art():
             number = request.values.get("art_piece")
 
             username = db.execute("SELECT username FROM users WHERE id = ?", session["user_id"])[0]
+            print(username)
+            print(str(random.randint(0, 10000)))
             filename = "/static/favorites/" + str(random.randint(0, 10000)) + username + ".png"
 
             with open(filename, "wb") as f:
