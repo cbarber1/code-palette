@@ -69,7 +69,7 @@ def art():
 
             s3 = boto3.client('s3')
             with open(filename, "rb") as f:
-                s3.upload_fileobj(f, codepalette, filename)
+                s3.upload_fileobj(f, "codepalette", filename)
 
             # Not very efficient because I am saving image into SQL, takes a long time to load
             db.execute("INSERT INTO favorites (user_id, filename) VALUES (?, ?)", session["user_id"], filename)
