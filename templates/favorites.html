@@ -3,18 +3,6 @@
 {% block title %}
     Art Gallery
 {% endblock %}
-{% block script %}
-<script>
-function change_id(url) {
-  document.getElementById("image_url").value = url;
-}
-
-document.getElementById("delete_button").addEventListener('click', function() {
-  change_id(document.getElementById("delete_button").value);
-})
-</script>
-
-{% endblock %}
 {% block main %}
 <div class ="container">
 {% for row in favorites | batch(3) %}
@@ -34,7 +22,7 @@ document.getElementById("delete_button").addEventListener('click', function() {
           <a class="btn border" href="{{ piece }}" download="art.png" style="max-width: 100%;">Download</a>
           </div>
           <div class="col">
-            <button type="button" id="delete_button" class="btn border" data-toggle="modal" data-target="#myModal">
+            <button type="button" onclick="getElementById('image_url').value = {{piece}}" class="btn border" data-toggle="modal" data-target="#myModal">
               Delete
             </button>
 
