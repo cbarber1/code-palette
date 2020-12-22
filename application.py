@@ -21,9 +21,6 @@ from helpers import apology, login_required
 # Configure application
 app = Flask(__name__)
 
-# connecting s3
-s3 = boto3.client('s3')
-
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
@@ -139,6 +136,7 @@ def favorites():
     if request.method == "POST":
         url = request.values.get("url")
         filename = url.split("com/")
+        return filename[1]
         db.execute("DELETE FROM favorites WHERE filename = ?", filename[1])
 
         # Flash message
