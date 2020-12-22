@@ -148,6 +148,7 @@ def favorites():
         favs = db.execute("SELECT filename FROM favorites WHERE user_id = ?", session["user_id"])
         urls = []
         for i in range(len(favs)):
+            return str(len(favs))
             urls[i] = create_presigned_url('codepalette', favs[i]["filename"])
         return render_template("favorites.html", favorites=urls)
 
