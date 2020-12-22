@@ -3,6 +3,14 @@
 {% block title %}
     Art Gallery
 {% endblock %}
+{% block script %}
+<script>
+  $('#myModal').on('show.bs.modal', function (event) {
+    var myVal = $(event.relatedTarget).data('url');
+    $(this).find("#image_url").val(myVal);
+  });
+</script>
+{% endblock %}
 {% block main %}
 <div class ="container">
 {% for row in favorites | batch(3) %}
@@ -22,7 +30,7 @@
           <a class="btn border" href="{{ piece }}" download="art.png" style="max-width: 100%;">Download</a>
           </div>
           <div class="col">
-            <button type="button" onclick="getElementById('image_url').value = {{piece}}" class="btn border" data-toggle="modal" data-target="#myModal">
+            <button type="button" data-url="{{piece}}" class="btn border" data-toggle="modal" data-target="#myModal">
               Delete
             </button>
 
