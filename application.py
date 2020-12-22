@@ -1,6 +1,7 @@
 import os
 import datetime
 import random
+from binascii import a2b_base64
 
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session, url_for
@@ -14,6 +15,9 @@ from helpers import apology, login_required
 
 # Configure application
 app = Flask(__name__)
+
+# connecting s3
+s3 = boto3.client('s3')
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -37,7 +41,6 @@ Session(app)
 # Configure CS50 Library to use SQLite database
 db = SQL("postgres://bfoebkdwmfxfvs:173a7c7b1c4f3178aa029e1f255fce358614db72951807d30451b07b4f6c4ecc@ec2-54-84-98-18.compute-1.amazonaws.com:5432/ddrmgshdppad7o")
 
-
 @app.route("/", methods=["GET", "POST"])
 def index():
     # grab data
@@ -53,19 +56,19 @@ def art():
             number = request.values.get("art_piece")
 
             username = db.execute("SELECT username FROM users WHERE id = ?", session["user_id"])[0]
-            print(username)
-            print(str(random.randint(0, 10000)))
-            filename = "/static/favorites/" + str(random.randint(0, 10000)) + username + ".png"
+            #filename = "/static/favorites/" + str(random.randint(0, 10000)) + username + ".png"
 
-            with open(filename, "wb") as f:
-                f.write(url)
+            # data = split()
+            # binary_data = a2b_base64(data)
 
-            s3 = boto3.client('s3')
-            with open("FILE_NAME", "rb") as file:
-                s3.upload_fileobj(file, "codepalette", filename)
+            # fd = open('image.png', 'wb')
+            # fd.write(binary_data)
+            # fd.close()
+            # with open(filename, "wb") as f:
+            #     f.write(url)
 
             # Not very efficient because I am saving image into SQL, takes a long time to load
-            db.execute("INSERT INTO favorites (user_id, filename) VALUES (?, ?)", session["user_id"], filename)
+            db.execute("INSERT INTO favorites (user_id, filename) VALUES (?, ?)", session["user_id"], url)
 
             flash("Successfully saved into favorites!")
             return redirect("/art1?next=" + str(number))
