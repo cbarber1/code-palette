@@ -3,7 +3,14 @@
 {% block title %}
     Art Gallery
 {% endblock %}
+{% block script %}
+<script>
+function change_id(url) {
+  document.getElementById("url").value = url;
+}
+</script>
 
+{% endblock %}
 {% block main %}
 <div class ="container">
 {% for row in favorites | batch(3) %}
@@ -23,7 +30,7 @@
           <a class="btn border" href="{{ piece }}" download="art.png" style="max-width: 100%;">Download</a>
           </div>
           <div class="col">
-            <button type="button" class="btn border" data-toggle="modal" data-target="#myModal">
+            <button type="button" onclick="change_id({{piece}})" class="btn border" data-toggle="modal" data-target="#myModal">
               Delete
             </button>
 
@@ -58,7 +65,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       <form method="post">
-        <button class="btn border" value="{{ piece }}" name="url">Delete</button>
+        <button class="btn border" value="" id="url" name="url">Delete</button>
       </form>
       </div>
 
