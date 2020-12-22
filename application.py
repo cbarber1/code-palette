@@ -138,6 +138,9 @@ def favorites():
         filename = url.split("com/")
         name = filename[1].split("?")
         db.execute("DELETE FROM favorites WHERE filename = ?", name[0])
+        
+        client = boto3.client('s3')
+        client.delete_object(Bucket='codepalette', Key=name[0])
 
         # Flash message
         flash("Deleted from favorites")
