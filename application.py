@@ -58,14 +58,15 @@ def art():
             username = db.execute("SELECT username FROM users WHERE id = ?", session["user_id"])[0]
             filename = "/static/favorites/" + str(random.randint(0, 10000)) + username["username"] + ".png"
 
-            data = url.split(",")[1]
-            binary_data = a2b_base64(data)
+            data = url.split(",")
+            binary_data = a2b_base64(data[1])
 
-            with open(filename, "wb") as f:
-                f.write(binary_data)
+            fd = open(filename, 'wb')
+            fd.write(binary_data)
+            fd.close()
 
             # Not very efficient because I am saving image into SQL, takes a long time to load
-            db.execute("INSERT INTO favorites (user_id, filename) VALUES (?, ?)", session["user_id"], url)
+            db.execute("INSERT INTO favorites (user_id, filename) VALUES (?, ?)", session["user_id"], filename)
 
             flash("Successfully saved into favorites!")
             return redirect("/art1?next=" + str(number))
