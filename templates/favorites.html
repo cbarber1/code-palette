@@ -23,12 +23,12 @@
           <a class="btn border" href="{{ piece }}" download="art.png" style="max-width: 100%;">Download</a>
           </div>
           <div class="col">
-            <button type="button" class="btn border" data-toggle="modal" data-target="#myModal">
+            <button type="button" class="btn border" data-toggle="modal" data-target="{{ piece }}">
               Delete
             </button>
 
             <!-- The Modal -->
-            <div class="modal" id="myModal">
+            <div class="modal" id="{{ piece }}">
               <div class="modal-dialog">
                 <div class="modal-content">
 
@@ -47,7 +47,7 @@
                   <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                   <form method="post">
-                    <button class="btn border" value="{{piece}}" name="url">Delete</button>
+                    <button class="btn border" value="{{ piece }}" name="url">Delete</button>
                   </form>
                   </div>
 
