@@ -57,7 +57,7 @@ def art():
             number = request.values.get("art_piece")
 
             username = db.execute("SELECT username FROM users WHERE id = ?", session["user_id"])[0]
-            filename = Path("/static/favorites/" + str(random.randint(0, 10000)) + username["username"] + ".png")
+            filename = Path(str(random.randint(0, 10000)) + username["username"] + ".png")
 
             data = url.split(",")
             binary_data = a2b_base64(data[1])
