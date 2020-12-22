@@ -138,7 +138,6 @@ def favorites():
     if request.method == "POST":
         url = request.values.get("url")
         filename = url.split("com/")
-        return filename[0]
         name = filename[1].split("?")
         db.execute("DELETE FROM favorites WHERE filename = ?", name[0])
 
