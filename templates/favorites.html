@@ -6,9 +6,10 @@
 {% block script %}
 <script>
   $('#myModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget)
-    var myVar = button.data('url')
-    var modal = $(this)
+    var button = $(event.relatedTarget);
+    var myVar = button.data('url');
+    var modal = $(this);
+    console.log(myVar);
     modal.find("#image_url").val(myVar);
   });
 </script>
