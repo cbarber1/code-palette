@@ -57,11 +57,12 @@ def art():
             number = request.values.get("art_piece")
 
             username = db.execute("SELECT username FROM users WHERE id = ?", session["user_id"])[0]
-            filename = Path(str(random.randint(0, 10000)) + username["username"] + ".png")
+            filename = str(random.randint(0, 10000)) + username["username"] + ".png"
 
             data = url.split(",")
             binary_data = a2b_base64(data[1])
-            filename.touch(exist_ok=True)  # will create file, if it exists will do nothing
+            file_path = Path(filename)
+            file_path.touch(exist_ok=True)  # will create file, if it exists will do nothing
             fd = open(filename, 'wb')
             fd.write(binary_data)
             fd.close()
