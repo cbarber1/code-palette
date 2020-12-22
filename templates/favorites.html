@@ -6,8 +6,12 @@
 {% block script %}
 <script>
 function change_id(url) {
-  document.getElementById("url").value = url;
+  document.getElementById("image_url").value = url;
 }
+
+document.getElementById("delete_button").addEventListener('click', function() {
+  change_id(document.getElementById("delete_button").value);
+})
 </script>
 
 {% endblock %}
@@ -30,7 +34,7 @@ function change_id(url) {
           <a class="btn border" href="{{ piece }}" download="art.png" style="max-width: 100%;">Download</a>
           </div>
           <div class="col">
-            <button type="button" onclick="change_id({{piece}})" class="btn border" data-toggle="modal" data-target="#myModal">
+            <button type="button" id="delete_button" class="btn border" data-toggle="modal" data-target="#myModal">
               Delete
             </button>
 
@@ -65,7 +69,7 @@ function change_id(url) {
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       <form method="post">
-        <button class="btn border" value="" id="url" name="url">Delete</button>
+        <button class="btn border" id="image_url" name="url">Delete</button>
       </form>
       </div>
 
