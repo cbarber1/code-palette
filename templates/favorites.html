@@ -5,7 +5,7 @@
 {% endblock %}
 {% block script %}
 <script>
-  $('#myModal').on('show.bs.modal', function (event) {
+  $('#myModal').on('shown.bs.modal', function (event) {
     var button = $(event.relatedTarget);
     var myVar = button.data('url');
     var modal = $(this);
