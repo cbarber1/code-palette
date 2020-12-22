@@ -147,7 +147,7 @@ def favorites():
         # taking all the data from SQL favorites table and displaying it
         favs = db.execute("SELECT filename FROM favorites WHERE user_id = ?", session["user_id"])
         urls = []
-        for i in range(favs.length):
+        for i in range(len(favs)):
             urls[i] = create_presigned_url('codepalette', favs[i]["filename"])
         return render_template("favorites.html", favorites=urls)
 
