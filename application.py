@@ -21,6 +21,8 @@ from helpers import apology, login_required
 # Configure application
 app = Flask(__name__)
 
+S3_BUCKET = os.environ.get('S3_BUCKET')
+
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
@@ -93,7 +95,7 @@ def art():
 
             s3 = boto3.client('s3')
             with open(filename, "rb") as f:
-                s3.upload_fileobj(f, "codepalette", filename)
+                s3.upload_fileobj(f, S3_BUCKET, filename)
 
             # Not very efficient because I am saving image into SQL, takes a long time to load
             db.execute("INSERT INTO favorites (user_id, filename) VALUES (?, ?)", session["user_id"], filename)
@@ -138,9 +140,9 @@ def favorites():
         filename = url.split("com/")
         name = filename[1].split("?")
         db.execute("DELETE FROM favorites WHERE filename = ?", name[0])
-        
+
         client = boto3.client('s3')
-        client.delete_object(Bucket='codepalette', Key=name[0])
+        client.delete_object(Bucket=S3_BUCKET, Key=name[0])
 
         # Flash message
         flash("Deleted from favorites")
@@ -150,7 +152,7 @@ def favorites():
         favs = db.execute("SELECT filename FROM favorites WHERE user_id = ?", session["user_id"])
         urls = []
         for i in range(len(favs)):
-            urls.append(create_presigned_url('codepalette', favs[i]["filename"]))
+            urls.append(create_presigned_url(S3_BUCKET, favs[i]["filename"]))
         return render_template("favorites.html", favorites=urls)
 
 
