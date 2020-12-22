@@ -12,15 +12,15 @@
 {% if piece != None %}
   <div class="col-md-4">
     <div class="crop">
-        <a href="{{ piece.filename }}">
-        <img class="gallery img-fluid" src="{{ piece.filename }}" alt="saved_photo">
+        <a href="{{ piece }}">
+        <img class="gallery img-fluid" src="{{ piece }}" alt="saved_photo">
         </a>
     </div>
     <div class="fonts">
         <div class="container text-center" style="padding-top: 1.5%;">
           <div class="row">
             <div class="col">
-          <a class="btn border" href="{{ piece.filename }}" download="art.png" style="max-width: 100%;">Download</a>
+          <a class="btn border" href="{{ piece }}" download="art.png" style="max-width: 100%;">Download</a>
           </div>
           <div class="col">
             <button type="button" class="btn border" data-toggle="modal" data-target="#myModal">
@@ -47,7 +47,7 @@
                   <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                   <form method="post">
-                    <button class="btn border" value="{{piece.filename}}" name="url">Delete</button>
+                    <button class="btn border" value="{{piece}}" name="url">Delete</button>
                   </form>
                   </div>
 

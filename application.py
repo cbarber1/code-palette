@@ -10,7 +10,11 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
-import json, boto3
+import json
+import logging
+import boto3
+from botocore.exceptions import ClientError
+
 
 from helpers import apology, login_required
 
@@ -41,6 +45,29 @@ Session(app)
 
 # Configure CS50 Library to use SQLite database
 db = SQL("postgres://bfoebkdwmfxfvs:173a7c7b1c4f3178aa029e1f255fce358614db72951807d30451b07b4f6c4ecc@ec2-54-84-98-18.compute-1.amazonaws.com:5432/ddrmgshdppad7o")
+
+def create_presigned_url(bucket_name, object_name, expiration=3600):
+    """Generate a presigned URL to share an S3 object
+
+    :param bucket_name: string
+    :param object_name: string
+    :param expiration: Time in seconds for the presigned URL to remain valid
+    :return: Presigned URL as string. If error, returns None.
+    """
+
+    # Generate a presigned URL for the S3 object
+    s3_client = boto3.client('s3')
+    try:
+        response = s3_client.generate_presigned_url('get_object',
+                                                    Params={'Bucket': bucket_name,
+                                                            'Key': object_name},
+                                                    ExpiresIn=expiration)
+    except ClientError as e:
+        logging.error(e)
+        return None
+
+    # The response contains the presigned URL
+    return response
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -119,7 +146,10 @@ def favorites():
     else:
         # taking all the data from SQL favorites table and displaying it
         favs = db.execute("SELECT filename FROM favorites WHERE user_id = ?", session["user_id"])
-        return render_template("favorites.html", favorites=favs)
+        urls = []
+        for i in range(favs.length):
+            urls[i] = create_presigned_url('codepalette', favs[i]["filename"])
+        return render_template("favorites.html", favorites=urls)
 
 
 @app.route("/gallery")
