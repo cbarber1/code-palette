@@ -180,7 +180,7 @@ def shop():
     shop = db.execute("SELECT id, name, cost, description, images FROM shop ORDER BY id")
     for i in range(len(shop)):
         filename = shop[i]["images"].split("com/")[1].split("?")[0]
-        db.execute("UPDATE shop SET images = ? WHERE id = ?", filename, i))
+        db.execute("UPDATE shop SET images = ? WHERE id = ?", filename, i)
 
     return render_template("shop.html", info=shop)
 
