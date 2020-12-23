@@ -45,6 +45,7 @@ Session(app)
 # Configure CS50 Library to use SQLite database
 db = SQL("postgres://bfoebkdwmfxfvs:173a7c7b1c4f3178aa029e1f255fce358614db72951807d30451b07b4f6c4ecc@ec2-54-84-98-18.compute-1.amazonaws.com:5432/ddrmgshdppad7o")
 
+# for connecting to Amazon S3 bucket
 def create_presigned_url(bucket_name, object_name, expiration=3600):
     """Generate a presigned URL to share an S3 object
 
@@ -85,6 +86,7 @@ def art():
             username = db.execute("SELECT username FROM users WHERE id = ?", session["user_id"])[0]
             filename = str(random.randint(0, 10000)) + username["username"] + ".png"
 
+            # putting the saved image into the server temporarily
             data = url.split(",")
             binary_data = a2b_base64(data[1])
             file_path = Path(filename)
@@ -93,6 +95,8 @@ def art():
             fd.write(binary_data)
             fd.close()
 
+            # putting the file into the Amazon S3 bucket
+            # using boto3 library, look at their docs on uploading files to get more od an idea
             s3 = boto3.client('s3')
             with open(filename, "rb") as f:
                 s3.upload_fileobj(f, S3_BUCKET, filename)
@@ -139,8 +143,11 @@ def favorites():
         url = request.values.get("url")
         filename = url.split("com/")
         name = filename[1].split("?")
+
+        # Delete saved image from the favorites table
         db.execute("DELETE FROM favorites WHERE filename = ?", name[0])
 
+        # Deletes the object from the S3 bucket to not waste storage
         client = boto3.client('s3')
         client.delete_object(Bucket=S3_BUCKET, Key=name[0])
 
@@ -167,7 +174,10 @@ def gallery():
 def shop():
     """ Shop """
     shop = db.execute("SELECT id, name, cost, description, images FROM shop ORDER BY id")
-    return render_template("shop.html", shop=shop)
+    urls = []
+    for i in range(len(favs)):
+        urls.append(create_presigned_url(S3_BUCKET, favs[i]["images"]))
+    return render_template("shop.html", shop=urls, info=shop)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
