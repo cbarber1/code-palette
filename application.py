@@ -173,11 +173,16 @@ def gallery():
 @app.route("/shop")
 def shop():
     """ Shop """
-    shop = db.execute("SELECT id, name, cost, description, images FROM shop ORDER BY id")
-    urls = []
+    shop = db.execute("SELECT id FROM shop ORDER BY id")
     for i in range(len(shop)):
-        urls.append(create_presigned_url(S3_BUCKET, shop[i]["images"]))
-    return render_template("shop.html", shop=urls, info=shop)
+        url = create_presigned_url(S3_BUCKET, shop[i]["images"])
+        db.execute("UPDATE shop SET images = ? WHERE id = ?", url, i)
+    shop = db.execute("SELECT id, name, cost, description, images FROM shop ORDER BY id")
+    for i in range(len(shop)):
+        filename = shop[i]["images"].split("com/")[1].split("?")[0]
+        db.execute("UPDATE shop SET images = ? WHERE id = ?", filename, i))
+
+    return render_template("shop.html", info=shop)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():

@@ -1,26 +1,27 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Art Gallery
+    Shop
 {% endblock %}
 
 {% block main %}
 <div class ="container">
 <div class="row">
-{% for row in shop | batch(3) %}
+{% for row in info | batch(3) %}
 <div class="row" style="padding-top: 1%;">
 {% for piece in row %}
 {% if piece != None %}
   <div class="col-md-4">
     <div class="crop">
-        <a href="/art1?next={{ piece }}">
-        <img class="gallery" src="{{ piece }}" alt="image" style="max-width: 100%;">
+        <a href="/shopart?art={{ piece.id }}">
+        <img class="gallery" src="{{ piece.images }}" alt="image" style="max-width: 100%;">
         </a>
     </div>
     <div class="fonts">
     <div class="container text-center">
-        <a href="/art1?next={{ piece }}" style="color:black;">
-            <p class="">Careful Tension</p>
+        <a href="/shopart?art={{ piece.id }}" style="color:black;">
+            <p class="">{{ piece.name }}</p>
+            <p>${{ piece.cost }}.00</p>
         </a>
     </div>
     </div>
