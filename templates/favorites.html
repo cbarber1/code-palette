@@ -33,9 +33,12 @@
           <a class="btn border" href="{{ piece }}" download="art.png" style="max-width: 100%;">Download</a>
           </div>
           <div class="col">
-            <button type="button" data-url="{{piece}}" class="btn border" data-toggle="modal" data-target="#myModal">
+            <!--<button type="button" data-url="{{piece}}" class="btn border" data-toggle="modal" data-target="#myModal">
               Delete
-            </button>
+            </button> -->
+            <form method="post">
+              <button class="btn border" value="{{piece}}" name="url">Delete</button>
+            </form>
 
           </div>
           </div>
@@ -48,23 +51,23 @@
 {% endfor %}
 </div>
 
-<!-- The Modal -->
+<!-- The Modal
 <div class="modal" id="myModal">
   <div class="modal-dialog">
     <div class="modal-content">
 
-      <!-- Modal Header -->
+      <!-- Modal Header
       <div class="modal-header">
         <h4 class="modal-title">Confirmation</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
 
-      <!-- Modal body -->
+      <!-- Modal body
       <div class="modal-body">
         Are you sure you want to delete this image?
       </div>
 
-      <!-- Modal footer -->
+      <!-- Modal footer
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       <form method="post">
@@ -75,5 +78,6 @@
     </div>
   </div>
 </div>
+-->
 
 {% endblock %}
