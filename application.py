@@ -158,11 +158,16 @@ def favorites():
 
 @app.route("/gallery")
 def gallery():
-    """Show history of transactions"""
+    """Show gallery of art"""
     # taking all the data from SQL gallery table and displaying it
     art = db.execute("SELECT id, filename, name FROM gallery ORDER BY id")
     return render_template("gallery.html", gallery=art)
 
+@app.route("/shop")
+def shop():
+    """ Shop """
+    shop = db.execute("SELECT id, filename, name, cost FROM shop ORDER BY id")
+    return render_template("shop.html", shop=shop)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
