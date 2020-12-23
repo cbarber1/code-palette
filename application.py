@@ -166,7 +166,7 @@ def gallery():
 @app.route("/shop")
 def shop():
     """ Shop """
-    shop = db.execute("SELECT id, filename, name, cost FROM shop ORDER BY id")
+    shop = db.execute("SELECT id, name, cost, description, images FROM shop ORDER BY id")
     return render_template("shop.html", shop=shop)
 
 @app.route("/login", methods=["GET", "POST"])
