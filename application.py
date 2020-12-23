@@ -175,8 +175,8 @@ def shop():
     """ Shop """
     shop = db.execute("SELECT id, name, cost, description, images FROM shop ORDER BY id")
     urls = []
-    for i in range(len(favs)):
-        urls.append(create_presigned_url(S3_BUCKET, favs[i]["images"]))
+    for i in range(len(shop)):
+        urls.append(create_presigned_url(S3_BUCKET, shop[i]["images"]))
     return render_template("shop.html", shop=urls, info=shop)
 
 @app.route("/login", methods=["GET", "POST"])
