@@ -173,7 +173,7 @@ def gallery():
 @app.route("/shop")
 def shop():
     """ Shop """
-    shop = db.execute("SELECT id FROM shop ORDER BY id")
+    shop = db.execute("SELECT id, images FROM shop ORDER BY id")
     for i in range(len(shop)):
         url = create_presigned_url(S3_BUCKET, shop[i]["images"])
         db.execute("UPDATE shop SET images = ? WHERE id = ?", url, i)
