@@ -178,9 +178,10 @@ def shop():
         url = create_presigned_url(S3_BUCKET, shop[i]["images"])
         db.execute("UPDATE shop SET images = ? WHERE id = ?", url, i)
     shop = db.execute("SELECT id, name, cost, description, images FROM shop ORDER BY id")
-    for i in range(len(shop)):
-        filename = shop[i]["images"].split("com/")[1].split("?")[0]
-        db.execute("UPDATE shop SET images = ? WHERE id = ?", filename, i)
+    # for i in range(len(shop)):
+    #     filename = shop[i]["images"].split("com/")
+    #     name = filename[1].split("?")
+    #     db.execute("UPDATE shop SET images = ? WHERE id = ?", filename[0], i)
 
     return render_template("shop.html", info=shop)
 
