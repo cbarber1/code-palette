@@ -177,7 +177,7 @@ def shop():
     """ Shop """
     shop = db.execute("SELECT id, image_name FROM shop ORDER BY id")
     for i in shop:
-        url = append(create_presigned_url(S3_BUCKET, i["image_name"]))
+        url = create_presigned_url(S3_BUCKET, i["image_name"])
         db.execute("UPDATE shop SET image_url = ? WHERE id = ?", url, i["id"])
     shop = db.execute("SELECT id, name, cost, description, image_url FROM shop ORDER BY id")
 
