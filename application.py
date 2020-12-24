@@ -22,6 +22,8 @@ from helpers import apology, login_required
 app = Flask(__name__)
 
 S3_BUCKET = os.environ.get('S3_BUCKET')
+STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -174,9 +176,9 @@ def gallery():
 def shop():
     """ Shop """
     shop = db.execute("SELECT id, image_name FROM shop ORDER BY id")
-    for i in range(len(shop)):
-        url = create_presigned_url(S3_BUCKET, shop[i]["image_name"])
-        db.execute("UPDATE shop SET image_url = ? WHERE id = ?", url, i)
+    for i in shop:
+        url = create_presigned_url(S3_BUCKET, i["image_name"])
+        db.execute("UPDATE shop SET image_url = ? WHERE id = ?", url, i["id"])
     shop = db.execute("SELECT id, name, cost, description, image_url FROM shop ORDER BY id")
 
     return render_template("shop.html", info=shop)
