@@ -48,7 +48,7 @@ Session(app)
 db = SQL("postgres://bfoebkdwmfxfvs:173a7c7b1c4f3178aa029e1f255fce358614db72951807d30451b07b4f6c4ecc@ec2-54-84-98-18.compute-1.amazonaws.com:5432/ddrmgshdppad7o")
 
 # for connecting to Amazon S3 bucket
-def create_presigned_url(bucket_name, object_name, expiration=3600):
+def create_presigned_url(bucket_name, object_name, expiration=6800):
     """Generate a presigned URL to share an S3 object
 
     :param bucket_name: string
