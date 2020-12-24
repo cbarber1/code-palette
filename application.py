@@ -48,7 +48,7 @@ Session(app)
 db = SQL("postgres://bfoebkdwmfxfvs:173a7c7b1c4f3178aa029e1f255fce358614db72951807d30451b07b4f6c4ecc@ec2-54-84-98-18.compute-1.amazonaws.com:5432/ddrmgshdppad7o")
 
 # for connecting to Amazon S3 bucket
-def create_presigned_url(bucket_name, object_name, expiration=6800):
+def create_presigned_url(bucket_name, object_name, expiration=3600):
     """Generate a presigned URL to share an S3 object
 
     :param bucket_name: string
@@ -175,13 +175,13 @@ def gallery():
 @app.route("/shop")
 def shop():
     """ Shop """
-    shop = db.execute("SELECT id, image_name FROM shop ORDER BY id")
+    shop = db.execute("SELECT id, name, cost, description, image_name, image_url FROM shop ORDER BY id")
+    urls = []
     for i in shop:
-        url = create_presigned_url(S3_BUCKET, i["image_name"])
-        db.execute("UPDATE shop SET image_url = ? WHERE id = ?", url, i["id"])
-    shop = db.execute("SELECT id, name, cost, description, image_url FROM shop ORDER BY id")
+        urls.append(create_presigned_url(S3_BUCKET, i["image_name"]))
+        #db.execute("UPDATE shop SET image_url = ? WHERE id = ?", url, i["id"])
 
-    return render_template("shop.html", info=shop)
+    return render_template("shop.html", info=shop, urls=urls)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():

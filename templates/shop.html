@@ -22,8 +22,8 @@
 {% if piece != None %}
   <div class="col-md-4">
     <div class="crop">
-        <a href="{{ piece }}">
-        <img class="gallery img-fluid" src="{{ piece.image_url }}" alt="saved_photo">
+        <a href="{{ urls[piece.id - 1] }}">
+        <img class="gallery img-fluid" src="{{ urls[piece.id - 1] }}" alt="saved_photo">
         </a>
     </div>
     <div class="fonts">
