@@ -9,7 +9,6 @@
   const checkout_public_key = '{{checkout_public_key}}';
   const checkout_session_id = '{{checkout_session_id}}';
 </script>
-<script src="stripe_no_ajax.js"></script>
 {% endblock %}
 {% block main %}
 <div class ="container">
@@ -40,5 +39,6 @@
 </div>
 {% endfor %}
 </div>
+<script src="{{ url_for('static', filename='stripe_no_ajax.js') }}"></script>
 
 {% endblock %}

@@ -14,6 +14,7 @@ import json
 import logging
 import boto3
 from botocore.exceptions import ClientError
+import stripe
 
 
 from helpers import apology, login_required
@@ -75,18 +76,23 @@ def create_presigned_url(bucket_name, object_name, expiration=3600):
 
 @app.route('/create-checkout-session', methods=['POST'])
 def create_checkout_session():
+  """ Shop """
   stripe_session = stripe.checkout.Session.create(
-    payment_method_types=['card'],
-    line_items=[{
-      'price': 'price_1I22Y2IiIZhOcbofQJ1CqAol',
-      'quantity': 1,
-    }],
-    mode='payment',
-    success_url= url_for('success', _external=True) + '?session_id={CHECKOUT_SESSION_ID}',
-    cancel_url= url_for('shop', _external=True),
+      billing_address_collection='auto',
+      shipping_address_collection={
+        'allowed_countries': ['US', 'CA'],
+      },
+      payment_method_types=['card'],
+      line_items=[{
+        'price': 'price_1I248eIiIZhOcbofSdTtkNlM',
+        'quantity': 1,
+      }],
+      mode='payment',
+      success_url= url_for('success', _external=True) + '?session_id={CHECKOUT_SESSION_ID}',
+      cancel_url= url_for('shop', _external=True),
   )
 
-  return jsonify(id=session.id)
+  return jsonify(id=stripe_session.id)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -191,7 +197,6 @@ def gallery():
 
 @app.route("/shop")
 def shop():
-    """ Shop """
     shop = db.execute("SELECT id, name, cost, description, image_name, image_url FROM shop ORDER BY id")
     urls = []
     for i in shop:
