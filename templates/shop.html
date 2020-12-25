@@ -1,18 +1,15 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Art Gallery
+    Shop
 {% endblock %}
 {% block script %}
+<script src="https://js.stripe.com/v3/"></script>
 <script>
-  // $('#myModal').on('shown.bs.modal', function (event) {
-  //   var button = $(event.relatedTarget);
-  //   var myVar = button.data('url');
-  //   var modal = $(this);
-  //   console.log(myVar);
-  //   modal.find("#image_url").val(myVar);
-  // });
+  const checkout_public_key = '{{checkout_public_key}}';
+  const checkout_session_id = '{{checkout_session_id}}';
 </script>
+<script src="stripe_no_ajax.js"></script>
 {% endblock %}
 {% block main %}
 <div class ="container">
@@ -32,6 +29,7 @@
             <div class="col">
           <p>{{ piece.name }}</p>
           <p>${{ piece.cost }}.00</p>
+           <button class="btn border" id="checkout-button">Checkout</button>
           </div>
           </div>
         </div>

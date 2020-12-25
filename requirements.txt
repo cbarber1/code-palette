@@ -5,3 +5,4 @@ requests
 gunicorn
 psycopg2
 boto3
+stripe>=2.48.0,<3.0

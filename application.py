@@ -5,7 +5,7 @@ from binascii import a2b_base64
 from pathlib import Path
 
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, session, url_for
+from flask import Flask, flash, redirect, render_template, request, session, url_for, jsonify
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
@@ -28,6 +28,8 @@ STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
+# Stripe setup
+stripe.api_key = STRIPE_SECRET_KEY
 
 # Ensure responses aren't cached
 @app.after_request
@@ -70,6 +72,21 @@ def create_presigned_url(bucket_name, object_name, expiration=3600):
 
     # The response contains the presigned URL
     return response
+
+@app.route('/create-checkout-session', methods=['POST'])
+def create_checkout_session():
+  stripe_session = stripe.checkout.Session.create(
+    payment_method_types=['card'],
+    line_items=[{
+      'price': 'price_1I22Y2IiIZhOcbofQJ1CqAol',
+      'quantity': 1,
+    }],
+    mode='payment',
+    success_url= url_for('success', _external=True) + '?session_id={CHECKOUT_SESSION_ID}',
+    cancel_url= url_for('shop', _external=True),
+  )
+
+  return jsonify(id=session.id)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -181,7 +198,13 @@ def shop():
         urls.append(create_presigned_url(S3_BUCKET, i["image_name"]))
         #db.execute("UPDATE shop SET image_url = ? WHERE id = ?", url, i["id"])
 
-    return render_template("shop.html", info=shop, urls=urls)
+    return render_template("shop.html", info=shop, urls=urls,
+        checkout_public_key=STRIPE_PUBLIC_KEY
+    )
+
+@app.route("/success")
+def success():
+    return render_template("success.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
