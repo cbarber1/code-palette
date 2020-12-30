@@ -33,6 +33,10 @@ img .one .gallery {
   width: 700px;
 }
 
+a {
+  color: black;
+}
+
 .fonts {
   font-family: "Courier";
 }

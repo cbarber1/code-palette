@@ -84,7 +84,7 @@ def create_checkout_session():
       },
       payment_method_types=['card'],
       line_items=[{
-        'price': 'price_1I22Y2IiIZhOcbofQJ1CqAol',
+        'price': 'price_1I248eIiIZhOcbofSdTtkNlM',
         'quantity': 1,
       }],
       mode='payment',
@@ -203,9 +203,15 @@ def shop():
         urls.append(create_presigned_url(S3_BUCKET, i["image_name"]))
         #db.execute("UPDATE shop SET image_url = ? WHERE id = ?", url, i["id"])
 
-    return render_template("shop.html", info=shop, urls=urls,
-        checkout_public_key=STRIPE_PUBLIC_KEY
-    )
+    return render_template("shop.html", info=shop, urls=urls)
+
+@app.route("/shopart")
+def shopart():
+    piece = request.values.get("art")
+    art = db.execute("SELECT id, name, cost, description, image_name, image_url, price_data FROM shop WHERE id = ?", piece)[0]
+    url = create_presigned_url(S3_BUCKET, art["image_name"])
+
+    return render_template("shopart.html", art=art, url=url, checkout_public_key=STRIPE_PUBLIC_KEY)
 
 @app.route("/success")
 def success():

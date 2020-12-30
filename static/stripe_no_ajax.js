@@ -13,6 +13,7 @@ var checkoutButton = document.getElementById('checkout-button');
 checkoutButton.addEventListener('click', function() {
     // Create a new Checkout Session using the server-side endpoint you
     // created in step 3.
+    console.log(price_data);
     fetch('/create-checkout-session', {
       method: 'POST',
     })

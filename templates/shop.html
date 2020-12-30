@@ -3,13 +3,6 @@
 {% block title %}
     Shop
 {% endblock %}
-{% block script %}
-<script src="https://js.stripe.com/v3/"></script>
-<script>
-  const checkout_public_key = '{{checkout_public_key}}';
-  const checkout_session_id = '{{checkout_session_id}}';
-</script>
-{% endblock %}
 {% block main %}
 <div class ="container">
 {% for row in info | batch(3) %}
@@ -18,27 +11,26 @@
 {% if piece != None %}
   <div class="col-md-4">
     <div class="crop">
-        <a href="{{ urls[piece.id - 1] }}">
+        <a href="/shopart?art={{ piece.id }}">
         <img class="gallery img-fluid" src="{{ urls[piece.id - 1] }}" alt="saved_photo">
         </a>
     </div>
+    <a href="/shopart?art={{ piece.id }}">
     <div class="fonts">
         <div class="container text-center" style="padding-top: 1.5%;">
           <div class="row">
             <div class="col">
           <p>{{ piece.name }}</p>
           <p>${{ piece.cost }}.00</p>
-           <button class="btn border" id="checkout-button">Checkout</button>
           </div>
           </div>
         </div>
     </div>
+    </a>
   </div>
 {% endif %}
 {% endfor %}
 </div>
 {% endfor %}
 </div>
-<script src="{{ url_for('static', filename='stripe_no_ajax.js') }}"></script>
-
 {% endblock %}

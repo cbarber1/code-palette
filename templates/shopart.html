@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Shop
+{% endblock %}
+{% block script %}
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  const checkout_public_key = '{{checkout_public_key}}';
+  const checkout_session_id = '{{checkout_session_id}}';
+  const price_data = '{{ art.price_data }}';
+</script>
+{% endblock %}
+{% block main %}
+    <div class = "container fonts">
+        <div class="row">
+        <div class="col text-left">
+          <a class="btn border" href="/shop" name="next">Back to Shop</a>
+        </div>
+        </div>
+    </div>
+    <div class="container fonts">
+      <div class="row">
+        <div class="col text-left" style="padding-top: 5%;">
+          <h2> {{ art.name }} </h2>
+          <p> {{ art.description }} </p>
+          <button class="btn border" id="checkout-button">Purchase</button>
+        </div>
+        <div class="col">
+          <img src="{{ url }}" style="width:600px; height: auto;">
+        </div>
+
+      </div>
+    </div>
+    <script src="{{ url_for('static', filename='stripe_no_ajax.js') }}"></script>
+
+
+{% endblock %}
