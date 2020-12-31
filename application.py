@@ -84,7 +84,7 @@ def create_checkout_session():
       },
       payment_method_types=['card'],
       line_items=[{
-        'price': 'price_1I248eIiIZhOcbofSdTtkNlM',
+        'price': 'price_1I22Y2IiIZhOcbofQJ1CqAol',
         'quantity': 1,
       }],
       mode='payment',
