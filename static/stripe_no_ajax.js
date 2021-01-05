@@ -16,7 +16,13 @@ checkoutButton.addEventListener('click', function() {
     console.log(price_data);
     fetch('/create-checkout-session', {
       method: 'POST',
-      body: JSON.stringify({ price : price_data })
+      // Adding body or contents to send
+      body: JSON.stringify({ 'price': price_data }), 
+
+      // Adding headers to the request
+      headers: {
+          "Content-type": "application/json; charset=UTF-8"
+      }
     })
     .then(function(response) {
       return response.json();

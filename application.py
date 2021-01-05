@@ -32,13 +32,13 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 # Stripe setup
 stripe.api_key = STRIPE_SECRET_KEY
 
-@app.before_request
-def before_request():
-    if not request.is_secure and app.env != "development":
-        url = request.url.replace("http://", "https://", 1)
-        code = 301
-        return redirect(url, code=code)
-    
+# @app.before_request
+# def before_request():
+#     if not request.is_secure and app.env != "development":
+#         url = request.url.replace("http://", "https://", 1)
+#         code = 301
+#         return redirect(url, code=code)
+
 # Ensure responses aren't cached
 @app.after_request
 def after_request(response):
@@ -84,6 +84,9 @@ def create_presigned_url(bucket_name, object_name, expiration=3600):
 @app.route('/create-checkout-session', methods=['POST'])
 def create_checkout_session():
   """ Shop """
+
+  price = request.get_json();
+
   stripe_session = stripe.checkout.Session.create(
       billing_address_collection='auto',
       shipping_address_collection={
@@ -91,7 +94,7 @@ def create_checkout_session():
       },
       payment_method_types=['card'],
       line_items=[{
-        'price': 'price_1I22Y2IiIZhOcbofQJ1CqAol',
+        'price': price['price'],
         'quantity': 1,
       }],
       mode='payment',
