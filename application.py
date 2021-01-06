@@ -112,7 +112,8 @@ def index():
 @app.route("/about", methods=["GET"])
 def about():
     # grab data
-    return render_template("about.html")
+    url = create_presigned_url(S3_BUCKET, "aboutme.jpeg")
+    return render_template("about.html", url=url)
 
 @app.route("/art1", methods=["GET", "POST"])
 def art():

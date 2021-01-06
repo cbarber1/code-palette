@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    About
+{% endblock %}
+
+{% block main %}
+<div class="container fonts">
+  <div class="row">
+  <div class="col-md-6">
+<h2> About me </h2>
+
+<p>Hi, my name is Chris Barber and I am a college student studying computer science.
+  As you can probably tell, I love creative coding and generative art.
+  I just find it fascinating that math and technology and randomness can create something so beautiful.
+  I've only been doing generative art for a few months, but I decided to make this website to showcase my pieces along
+  with their code which I think is art in itself (not that my code is any good haha). </p>
+  </div>
+<div class="col-md-6">
+<img src="{{url}}" style="width: 500px; height:auto;">
+</div>
+</div>
+<div class="row" style="padding-top: 2%;">
+<p>I started on my generative and creative coding journey through the youtube channel The Coding Train. His videos are absolutely amazing and are great for both beginners and experts alike.</p>
+</div>
+<p>Hope you like it!</p>
+</div>
+{% endblock %}
