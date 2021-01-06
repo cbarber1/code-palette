@@ -21,14 +21,14 @@
     </div>
     <div class="container fonts">
       <div class="row">
-        <div class="col text-left" style="padding-top: 5%;">
+        <div class="col-md-6 text-left" style="padding-top: 5%;">
           <h2> {{ art.name }} </h2>
           {% for word in words %}
           <p> {{ word }} </p>
           {% endfor %}
           <button class="btn border" id="checkout-button">Purchase</button>
         </div>
-        <div class="col">
+        <div class="col-md-6">
           <img src="{{ url }}" style="width:600px; height: auto;">
         </div>
 
