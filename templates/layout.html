@@ -64,8 +64,19 @@
             {% block main %}{% endblock %}
         </main>
 
-        <footer class="small text-center text-muted">
-            By Chris Barber!
+        <footer class="{% block footer %}{% endblock %} d-flex justify-content-center mt-auto small text-muted">
+          <div class="d-flex justify-content-between col-md-10 col-md-offset-2 mb-3 mt-5">
+          <div class="container" style="padding-bottom: 2%;">
+            <div class ="row">
+          <div class="col text-left">
+            Code Palette Dec. 2020
+          </div>
+          <div class="col text-right">
+            <a class="" href="https://www.instagram.com/code_rgb" target="_blank"><img src="static\instagram.png" style="width: 20px;height: auto;"></a>
+          </div>
+        </div>
+        </div>
+      </div>
         </footer>
 
     </body>

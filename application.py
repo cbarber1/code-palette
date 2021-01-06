@@ -109,6 +109,11 @@ def index():
     # grab data
     return render_template("index.html")
 
+@app.route("/about", methods=["GET"])
+def about():
+    # grab data
+    return render_template("about.html")
+
 @app.route("/art1", methods=["GET", "POST"])
 def art():
     # grab data
