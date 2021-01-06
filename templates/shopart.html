@@ -23,7 +23,9 @@
       <div class="row">
         <div class="col text-left" style="padding-top: 5%;">
           <h2> {{ art.name }} </h2>
-          <p> {{ art.description }} </p>
+          {% for word in words %}
+          <p> {{ word }} </p>
+          {% endfor %}
           <button class="btn border" id="checkout-button">Purchase</button>
         </div>
         <div class="col">

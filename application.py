@@ -220,8 +220,12 @@ def shopart():
     piece = request.values.get("art")
     art = db.execute("SELECT id, name, cost, description, image_name, image_url, price_data FROM shop WHERE id = ?", piece)[0]
     url = create_presigned_url(S3_BUCKET, art["image_name"])
+    words = []
+    parts = art["description"].split("&")
+    for part in parts:
+        words.append(part)
 
-    return render_template("shopart.html", art=art, url=url, checkout_public_key=STRIPE_PUBLIC_KEY)
+    return render_template("shopart.html", art=art, url=url, words=words, checkout_public_key=STRIPE_PUBLIC_KEY)
 
 @app.route("/success")
 def success():
