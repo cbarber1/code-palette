@@ -17,16 +17,16 @@ let gifLength = 210;
 let paintCount = 0;
 var canvas;
 
-// Preloads image 
+// Preloads image
 function preload() {
   imgs[0] = loadImage("/static/art/code_palette.png");
 }
 
-// Setup function 
+// Setup function
 function setup() {
-	if (windowWidth < 500) {
-  	var c = createCanvas(windowWidth, windowWidth);
-  	c.parent('sketch-holder');
+	if (windowWidth < 800) {
+
+  	//imgs[0].parent('sketch-holder');
 	}
 	else {
   	canvas = createCanvas(800, 200);
