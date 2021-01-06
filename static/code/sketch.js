@@ -6,15 +6,19 @@ var inc = .0004; // .0004
 
 let looping = true;
 
-// Setup function 
+// Setup function
 function setup() {
   var canvas = createCanvas(500, 500);
   canvas.parent('sketch-holder');
+  resetSketch();
+}
+
+function resetSketch() {
+  particles = [];
   for (var i =0; i < 20; i++){
     particles.push(new Particle(mouseX, mouseY));
   }
 }
-
 // Adds new particle when mouse is clicked
 function mousePressed() {
   if (mouseX <= width && mouseX >= 0

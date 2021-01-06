@@ -9,11 +9,14 @@ function setup() {
   var canvas = createCanvas(500, 500);
   canvas.parent("sketch-holder");
   //beginRecord(PDF, "collatz.pdf");
+  resetSketch();
+}
+
+function resetSketch() {
   loops = random(800, 1200);
   background(0);
   frameRate(10);
 }
-
 // Makes it more random when mouse is pressed
 function mousePressed() {
   gaussian += 5;
@@ -68,4 +71,3 @@ function collatz(n) {
     return (n * 3 + 1)/2;
   }
 }
-

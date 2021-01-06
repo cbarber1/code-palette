@@ -3,10 +3,15 @@ let speed;
 
 let looping = true;
 
-// Setup function 
+// Setup function
 function setup() {
   var canvas = createCanvas(500,500);
   canvas.parent("sketch-holder");
+  resetSketch();
+}
+
+function resetSketch() {
+  stars = [];
   for (let i = 0; i < 800; i++) {
     stars.push(new Star());
   }

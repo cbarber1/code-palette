@@ -19,6 +19,12 @@ function setup() {
   //noLoop();
   colors = [[color(188, 216, 193), color(214, 219, 178), color(227, 217, 133), color(229, 122, 68)],
 [color(219, 177, 188), color(211, 196, 227), color(143, 149, 211), color(137, 218, 255)], [color(191, 107, 99), color(217, 163, 132), color(91, 158, 166), color(169, 212, 217)]];
+
+  resetSketch();
+}
+
+function resetSketch() {
+  radius = 350;
   random_colors = int(random(3));
 }
 

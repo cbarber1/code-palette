@@ -19,6 +19,8 @@
         } else if (key === "s" && looping == false) {
           loop();
           looping = true;
+        } else if (key === "r") {
+          resetSketch();
         }
       }
     </script>
@@ -59,7 +61,7 @@
                   <div class="tab-pane fade show active fonts" id="home" role="tabpanel" aria-labelledby="home-tab">
                     <h3>{{gallery[0].name}}</h3>
                     <p>{{gallery[0].description}}</p>
-                    <p>Pause the piece at any time using the S key on your keyboard.</p>
+                    <p>Reset using the R key on your keyboard. Pause the piece at any time using the S key on your keyboard.</p>
                   </div>
                   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" style="height:400px;">
                       <p class="fonts code">

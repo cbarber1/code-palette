@@ -9,13 +9,15 @@ function setup() {
   canvas.parent('sketch-holder');
   angleMode(DEGREES);
   colorMode(HSB);
-  let seed = random(100)
-  randomSeed(49.25067844587703);
-  console.log(seed);
-  d = random(100);
-  n = random(20);
+  resetSketch();
   //console.log(d);
   //console.log(n);
+}
+
+function resetSketch() {
+  randomSeed(49.25067844587703);
+  d = random(100);
+  n = random(20);
 }
 
 // Drawing using Maurer Rose equations

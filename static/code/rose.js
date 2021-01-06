@@ -1,5 +1,5 @@
-let n = 2; //2
-let d = 71; //71
+let n; //2
+let d; //71
 
 let looping = true;
 
@@ -9,6 +9,12 @@ function setup() {
   canvas.parent('sketch-holder');
   angleMode(DEGREES);
   //noLoop();
+  resetSketch();
+}
+
+function resetSketch() {
+  n = 2;
+  d = 71;
 }
 
 // Drawing with Maurer Rose equation

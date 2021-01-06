@@ -15,13 +15,19 @@ function setup() {
   cols = w / scl;
   rows = h / scl;
 
+  resetSketch();
+  frameRate(10);
+}
+
+function resetSketch() {
+  terrain = [];
+  flying = random(1000);
   for (var x = 0; x < cols; x++) {
     terrain[x] = [];
     for (var y = 0; y < rows; y++) {
       terrain[x][y] = 0; //specify a default value for now
     }
   }
-  frameRate(10);
 }
 
 // Draws the terrain
