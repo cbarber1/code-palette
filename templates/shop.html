@@ -7,12 +7,13 @@
 <div class ="container-fluid">
 {% for row in info | batch(3) %}
 <div class="row" style="padding-top: 3%;">
+{% set outer_loop = loop %}
 {% for piece in row %}
 {% if piece != None %}
   <div class="col-md-4">
     <div class="crop">
         <a href="/shopart?art={{ piece.id }}">
-        <img class="gallery" src="{{ urls[piece.id - 1] }}" alt="saved_photo">
+          <img class="gallery" src="{{ urls[piece.id - 1] }}" alt="saved_photo">
         </a>
     </div>
     <a href="/shopart?art={{ piece.id }}">
