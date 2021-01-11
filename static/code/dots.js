@@ -4,7 +4,7 @@ let colors;
 
 let circles = [];
 
-let looping = false;
+let looping = true;
 
 function setup() {
   var c = createCanvas(500, 500);
