@@ -24,14 +24,8 @@ function preload() {
 
 // Setup function
 function setup() {
-	if (windowWidth < 800) {
-
-  	//imgs[0].parent('sketch-holder');
-	}
-	else {
   	canvas = createCanvas(800, 200);
-    canvas.parent('sketch-holder');
-	}
+    canvas.parent('sketch-holder-i');
 
   img = createImage(width, height);
   nextImage();

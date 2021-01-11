@@ -40,6 +40,9 @@ a {
 .fonts {
   font-family: "Courier";
 }
+.fonts2 {
+  font-family: "Times";
+}
 .crop {
     /*width: 300px;*/
     height: auto;
@@ -64,7 +67,7 @@ a {
 .code
 {
     overflow: scroll;
-    width: 100%;
+    width: auto;
     height: 100%;
 }
 
@@ -90,4 +93,18 @@ a {
         left: 50%;
         transform: translate3d(-50%, -50%, 0) scale(1.015) rotate(0.5deg);
         border-radius: 1% 2% 2% 4% / 2% 6% 5% 4%;
+}
+
+#sketch-holder canvas {
+    width: 100% !important;
+    height: auto !important;
+}
+
+#sketch-holder-i canvas {
+    width: 70% !important;
+    height: auto !important;
+}
+
+.code {
+  background-color: #f1f1f1;
 }

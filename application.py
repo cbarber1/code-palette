@@ -237,91 +237,91 @@ def shopart():
 def success():
     return render_template("success.html")
 
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    """Log user in"""
-
-    # Forget any user_id
-    session.clear()
-
-    # User reached route via POST (as by submitting a form via POST)
-    if request.method == "POST":
-
-        # Ensure username was submitted
-        if not request.form.get("username"):
-            flash("Must provide username")
-            return render_template("login.html", alert="danger")
-
-        # Ensure password was submitted
-        elif not request.form.get("password"):
-            flash("Must provide password")
-            return render_template("login.html", alert="danger")
-
-        # Query database for username
-        rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
-
-        # Ensure username exists and password is correct
-        if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
-            flash("invalid username and/or password")
-            return render_template("login.html", alert="danger")
-
-        # Remember which user has logged in
-        session["user_id"] = rows[0]["id"]
-
-        # Redirect user to home page
-        flash("You were successfully logged in!")
-        return redirect("/")
-
-    # User reached route via GET (as by clicking a link or via redirect)
-    else:
-        return render_template("login.html")
-
-
-@app.route("/logout")
-def logout():
-    """Log user out"""
-
-    # Forget any user_id
-    session.clear()
-
-    # Redirect user to login form
-    flash("Logged out.")
-    return redirect("/")
+# @app.route("/login", methods=["GET", "POST"])
+# def login():
+#     """Log user in"""
+#
+#     # Forget any user_id
+#     session.clear()
+#
+#     # User reached route via POST (as by submitting a form via POST)
+#     if request.method == "POST":
+#
+#         # Ensure username was submitted
+#         if not request.form.get("username"):
+#             flash("Must provide username")
+#             return render_template("login.html", alert="danger")
+#
+#         # Ensure password was submitted
+#         elif not request.form.get("password"):
+#             flash("Must provide password")
+#             return render_template("login.html", alert="danger")
+#
+#         # Query database for username
+#         rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
+#
+#         # Ensure username exists and password is correct
+#         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
+#             flash("invalid username and/or password")
+#             return render_template("login.html", alert="danger")
+#
+#         # Remember which user has logged in
+#         session["user_id"] = rows[0]["id"]
+#
+#         # Redirect user to home page
+#         flash("You were successfully logged in!")
+#         return redirect("/")
+#
+#     # User reached route via GET (as by clicking a link or via redirect)
+#     else:
+#         return render_template("login.html")
 
 
-@app.route("/register", methods=["GET", "POST"])
-def register():
-    """Register user"""
-    error = None
-    if request.method == "POST":
-
-        username = request.form.get("username")
-        name = request.form.get("name")
-        password = request.form.get("password")
-        confirm = request.form.get("confirmation")
-
-        # Query database
-        rows = db.execute("SELECT username FROM users WHERE username = ?", username)
-
-        # Error checking
-        if not username or not password or not confirm:
-            flash("Please do not leave any inputs blank")
-            return render_template("register.html", alert="danger")
-        if len(rows) == 1:
-            flash("That username has been chosen already")
-            return render_template("register.html", alert="danger")
-        if confirm != password:
-            flash("Your passwords were not the same")
-            return render_template("register.html", alert="danger")
-
-        # Add hashed pass to SQL db
-        hashed_pass = generate_password_hash(password)
-        db.execute("INSERT INTO users(username, hash, name) VALUES(?, ?, ?)", username, hashed_pass, name)
-        flash("Successfully registered!")
-        return render_template("login.html")
-
-    else:
-        return render_template("register.html")
+# @app.route("/logout")
+# def logout():
+#     """Log user out"""
+#
+#     # Forget any user_id
+#     session.clear()
+#
+#     # Redirect user to login form
+#     flash("Logged out.")
+#     return redirect("/")
+#
+#
+# @app.route("/register", methods=["GET", "POST"])
+# def register():
+#     """Register user"""
+#     error = None
+#     if request.method == "POST":
+#
+#         username = request.form.get("username")
+#         name = request.form.get("name")
+#         password = request.form.get("password")
+#         confirm = request.form.get("confirmation")
+#
+#         # Query database
+#         rows = db.execute("SELECT username FROM users WHERE username = ?", username)
+#
+#         # Error checking
+#         if not username or not password or not confirm:
+#             flash("Please do not leave any inputs blank")
+#             return render_template("register.html", alert="danger")
+#         if len(rows) == 1:
+#             flash("That username has been chosen already")
+#             return render_template("register.html", alert="danger")
+#         if confirm != password:
+#             flash("Your passwords were not the same")
+#             return render_template("register.html", alert="danger")
+#
+#         # Add hashed pass to SQL db
+#         hashed_pass = generate_password_hash(password)
+#         db.execute("INSERT INTO users(username, hash, name) VALUES(?, ?, ?)", username, hashed_pass, name)
+#         flash("Successfully registered!")
+#         return render_template("login.html")
+#
+#     else:
+#         return render_template("register.html")
 
 
 def errorhandler(e):
