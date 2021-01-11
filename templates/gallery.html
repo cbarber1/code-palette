@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block main %}
-<div class ="container">
+<div class ="container-fluid">
 <div class="row">
 {% for row in gallery | batch(3) %}
 <div class="row" style="padding-top: 1%;">
@@ -18,7 +18,7 @@
         </a>
     </div>
     <div class="fonts">
-    <div class="container text-center">
+    <div class="container-fluid text-center">
         <a href="/art1?next={{piece.id}}" style="color:black;">
             <p class="">{{ piece.name }}</p>
         </a>
