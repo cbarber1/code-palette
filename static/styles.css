@@ -29,8 +29,8 @@ main img
 }
 
 img .one .gallery {
-  height: 700px;
-  width: 700px;
+  height: auto;
+  width: 100%;
 }
 
 a {
