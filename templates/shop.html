@@ -4,7 +4,7 @@
     Shop
 {% endblock %}
 {% block main %}
-<div class ="container-fluid">
+<div class ="container-fluid mx-1">
 {% for row in info | batch(3) %}
 <div class="row" style="padding-top: 3%;">
 {% set outer_loop = loop %}
@@ -18,7 +18,7 @@
     </div>
     <a href="/shopart?art={{ piece.id }}">
     <div class="fonts">
-        <div class="container-fluid text-center" style="padding-top: 1.5%;">
+        <div class="container-fluid mx-1 text-center" style="padding-top: 1.5%;">
           <p>{{ piece.name }}</p>
           <p>${{ piece.cost }}.00</p>
         </div>

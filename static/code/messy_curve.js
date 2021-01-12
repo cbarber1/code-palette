@@ -24,7 +24,7 @@ function preload() {
 
 // Setup function
 function setup() {
-  	canvas = createCanvas(800, 200);
+  	canvas = createCanvas(1200, 300);
     canvas.parent('sketch-holder-i');
 
   img = createImage(width, height);
