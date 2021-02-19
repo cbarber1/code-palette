@@ -39,10 +39,10 @@ function draw() {
   for (var y = 0; y < rows; y++) {
     var xoff = 0;
     for (var x = 0; x < cols; x++) {
-      terrain[x][y] = map(noise(xoff, yoff), 0, 1, -200, 500);
-      xoff += 0.02; // .2
+      terrain[x][y] = map(noise(xoff, yoff), 0, 1, -100, 100);
+      xoff += 0.2; // .2
     }
-    yoff += 0.02; // .2
+    yoff += 0.2; // .2
   }
 
   // Draws each vertex in 3d space
