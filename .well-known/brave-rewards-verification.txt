@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: codepalette.net
+Token: d7eb9e15e3fdfb7797d8dd80784ef159698ee67849a943c1c1e41888d9814fcf
